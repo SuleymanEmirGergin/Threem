@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StegoCrypt Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>StegoCrypt</h1>
+            <p>Securely encrypt data and hide it in images.</p>
+        </header>
+
+        <div class="demo-resources"
+            style="text-align: center; margin-bottom: 20px; padding: 15px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px;">
+            <h3 style="margin-top: 0; color: #4b5563; font-size: 1rem;">Demo Resources</h3>
+            <p style="margin-bottom: 10px; color: #6b7280; font-size: 0.9rem;">Download these files to test the
+                application:</p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a href="demo_image.png" download class="btn secondary"
+                    style="width: auto; margin: 0; background-color: #6366f1;">Download Cover Image</a>
+                <a href="demo_secret.txt" download class="btn secondary"
+                    style="width: auto; margin: 0; background-color: #8b5cf6;">Download Secret File</a>
+            </div>
+        </div>
+
+        <main>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="encode">Encrypt & Embed</button>
+            </div>
+
+            <section id="encode" class="tab-content active">
+                <h2>Encode</h2>
+                <form id="encodeForm">
+                    <div class="form-group">
+                        <label for="encodeFile">Cover Image (PNG)</label>
+                        <input type="file" id="encodeFile" accept="image/png" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Secret Data Type</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="secretType" value="text" checked> Text</label>
+                            <label><input type="radio" name="secretType" value="number"> Number</label>
+                            <label><input type="radio" name="secretType" value="file"> File</label>
+                            <label><input type="radio" name="secretType" value="audio"> Voice</label>
+                        </div>
+                    </div>
+
+                    <div id="input-text" class="input-section">
+                        <label for="secretText">Secret Text</label>
+                        <textarea id="secretText" rows="4" placeholder="Enter secret message..."></textarea>
+                    </div>
+
+                    <div id="input-number" class="input-section hidden">
+                        <label for="secretNumber">Secret Number</label>
+                        <input type="number" id="secretNumber" placeholder="Enter number...">
+                    </div>
+
+                    <div id="input-file" class="input-section hidden">
+                        <label for="secretFile">Secret File</label>
+                        <input type="file" id="secretFile">
+                    </div>
+
+                    <div id="input-audio" class="input-section hidden">
+                        <label>Voice Recording</label>
+                        <div class="audio-controls">
+                            <button type="button" id="recordBtn" class="btn secondary">Record</button>
+                            <button type="button" id="stopBtn" class="btn secondary" disabled>Stop</button>
+                            <span id="recordingStatus">Ready</span>
+                        </div>
+                        <audio id="audioPreview" controls class="hidden"></audio>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pattern Lock (Draw your secret key)</label>
+                        <div id="patternLockContainer" class="pattern-lock-container">
+                            <canvas id="patternLockCanvas" width="300" height="300"></canvas>
+                        </div>
+                        <input type="hidden" id="encodePassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="algorithm">Encryption Algorithm</label>
+                        <select id="algorithm">
+                            <option value="AES-256-GCM">AES-256-GCM</option>
+                            <option value="ChaCha20-Poly1305">ChaCha20-Poly1305</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn primary">Encrypt & Embed</button>
+                </form>
+                <div id="encodeResult" class="result hidden">
+                    <h3>Success!</h3>
+                    <p>Your data has been encrypted and embedded.</p>
+                    <a id="downloadLink" href="#" download="stego_image.png" class="btn secondary">Download Stego
+                        Image</a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
