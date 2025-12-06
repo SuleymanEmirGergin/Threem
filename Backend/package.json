@@ -5,7 +5,9 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "ts-node src/server.ts",
+    "dev": "ts-node src/server.ts",
     "build": "tsc",
+    "start:prod": "node dist/server.js",
     "test": "ts-node test/verification.ts"
   },
   "dependencies": {

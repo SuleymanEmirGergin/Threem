@@ -20,7 +20,7 @@ const upload = multer();
 // Basic JSON parsing for non-file fields
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public')); // Ensure public folder is served
+app.use(express.static('docs/demo')); // Serve demo files
 
 // ---- Types & constants ----
 
